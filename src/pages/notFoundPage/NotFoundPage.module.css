@@ -1,0 +1,12 @@
+.img {
+  max-width: 250px;
+  margin: auto;
+  margin-top: 20vh;
+}
+
+.text {
+    color: var(--color-white-);
+    text-align: center;
+    margin-top: var(--spacing-large);
+    text-shadow: var(--text-shadow-blue);
+}

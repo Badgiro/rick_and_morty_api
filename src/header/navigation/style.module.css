@@ -1,0 +1,99 @@
+/* Основные стили */
+.burger_menu {
+    position: relative;
+  }
+  
+  .burger_button {
+    font-size: 30px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: none; 
+  }
+  
+  .menu {
+  
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background-color: #333;
+    padding: 10px;
+    border-radius: 5px;
+    
+    
+  }
+
+  
+  .open {
+    display: block;
+  }
+  
+  .menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .menu ul li {
+    margin-bottom: 10px;
+    margin-right: 24px;
+  }
+  
+  .menu ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+  }
+  
+  .menu ul li a:hover {
+    color: blueviolet;
+  }
+  .menu_position {
+    max-width: 600px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+ 
+  @media (min-width: 800px) {
+    .burger_button {
+      display: none;
+    }
+  
+    .menu {
+      display: block;
+      position: static;
+      background-color: transparent;
+      padding: 0;
+    }
+  
+    .menu ul {
+      display: flex;
+      justify-content: space-between;
+    }
+  
+    .menu ul li {
+      margin-bottom: 0;
+    }
+  
+    .menu ul li a {
+      color: black;
+      font-size: 18px;
+    }
+  }
+  
+  
+  @media (max-width: 800px) {
+    .burger_button {
+      display: block;
+    }
+  
+    .menu {
+      display: none; 
+    }
+  
+    .open {
+      display: block; 
+    }
+  }

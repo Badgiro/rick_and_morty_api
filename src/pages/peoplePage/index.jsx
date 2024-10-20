@@ -4,7 +4,7 @@ import { fetchData } from "../../utils";
 import { useState, useEffect } from "react";
 
 import styles from "./style.module.css";
-import PaginationButton from "../../UIKit/paginationButton";
+
 
 const PeoplePage = () => {
   const [people, setPeople] = useState([])
@@ -19,7 +19,7 @@ const PeoplePage = () => {
  
   return <div>
     {
-      <PaginationButton>Load More</PaginationButton>
+      
     }
   </div>;
 };

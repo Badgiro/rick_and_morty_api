@@ -1,13 +1,26 @@
-import React from 'react'
-import styles from './styles.module.css'
+import { useState } from "react";
+import HeaderLogo from "./headerLogo";
+import HeaderNavigation from "./navigation";
+import styles from './style.module.css'
 
 const Header = () => {
-  return (
-    <div>
-        
-      
-    </div>
-  )
-}
+  const [isOpen, setIsOpen] = useState(false);
 
-export default Header
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
+  return (
+    <header className={styles.header}>
+      <HeaderLogo />
+
+      <HeaderNavigation
+        isOpen={isOpen}
+        toggleMenu={toggleMenu}
+        setIsOpen={setIsOpen}
+      />
+    </header>
+  );
+};
+
+export default Header;
