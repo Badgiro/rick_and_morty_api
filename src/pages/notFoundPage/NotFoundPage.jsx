@@ -1,6 +1,6 @@
 import React from 'react'
 import { useLocation } from 'react-router'
-import img from './img/image.png'
+import img from '../../assets/png/image.png'
 import styles from './NotFoundPage.module.css'
 
 const NotFoundPage = () => {

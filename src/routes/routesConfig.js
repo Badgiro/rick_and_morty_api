@@ -6,6 +6,10 @@ import NotFoundPage from "../pages/notFoundPage";
 
 const RoutesConfig =[
     {
+        path: '/',
+        component: <PeoplePage/>
+    },
+    {
         path: '/character',
         component: <PeoplePage/>
     },

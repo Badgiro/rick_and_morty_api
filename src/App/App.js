@@ -1,6 +1,6 @@
 import { Route, BrowserRouter, Routes } from "react-router-dom";
-import RoutesConfig from "../../routes/routesConfig";
-import Header from "../../header";
+import RoutesConfig from "../routes/routesConfig";
+import Header from "../header";
 
 import styles from "./style.module.css";
 
