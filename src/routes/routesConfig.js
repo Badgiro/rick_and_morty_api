@@ -2,7 +2,7 @@ import EpisodePage from "../pages/episodesPage";
 import PeoplePage from "../pages/peoplePage";
 import LocationsPage from "../pages/locationsPage";
 import NotFoundPage from "../pages/notFoundPage";
-
+import PersonPage from "../components/peoplePage/personPage";
 
 const RoutesConfig =[
     {
@@ -12,6 +12,10 @@ const RoutesConfig =[
     {
         path: '/character',
         component: <PeoplePage/>
+    },
+    {
+        path: '/character/:id',
+        component:<PersonPage/>
     },
     {
         path: '/location',

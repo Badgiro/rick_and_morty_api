@@ -6,17 +6,13 @@ import styles from './style.module.css'
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
-
   return (
     <header className={styles.header}>
       <HeaderLogo />
 
       <HeaderNavigation
         isOpen={isOpen}
-        toggleMenu={toggleMenu}
+        toggleMenu={() => setIsOpen(!isOpen)}
         setIsOpen={setIsOpen}
       />
     </header>

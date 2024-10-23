@@ -1,49 +1,19 @@
-import React from "react";
-import { characters, RAM_API } from "../../consts";
-import { fetchData } from "../../utils";
-import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchPeople } from '../../store/slices/peoplePageSlice';
 
-import styles from "./style.module.css";
-import PeopleList from "./peopleList";
-import { addPeople } from "../../store/slices/peoplePageSlice";
-
+import styles from './style.module.css';
+import PeopleList from '../../components/peoplePage/peopleList';
 
 const PeoplePage = () => {
-  const [people, setPeople] = useState([])
-  const dispatch = useDispatch()
-  const chars = async (url) => {
-    const res = await fetchData(url)
-    if(res) {
-      const charsList = res.results.map(({id, image, name, species})=>{
-        return{ 
-          image,
-          name,
-          species,
-          id
-        }
-        
-        
-      })
-      setPeople(charsList)
-      dispatch(addPeople({people:charsList}))
+  const dispatch = useDispatch();
+  const people = useSelector((state) => state.people.data);
 
-     
+  useEffect(() => {
+    dispatch(fetchPeople());
+  }, [dispatch]);
 
-
-    }
-  
-  }
-  useEffect(()=> {
-    chars(characters)
-  },[])
-
- 
-  return <div>
-    {
-      people&& <PeopleList/>
-    }
-  </div>;
+  return <div>{people && <PeopleList people={people} />}</div>;
 };
 
 export default PeoplePage;
