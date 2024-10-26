@@ -1,30 +1,15 @@
-import { useEffect } from "react"
-import { Link } from "react-router-dom"
+import Person from "../person";
 
-
-const PeopleList = ({people}) => {
-
-  console.log(people)
-  useEffect(()=> {
-  },[people])
+const PeopleList = ({ people }) => {
   return (
     <div>
-    <ul>
-     {people.map(person => {
-       return <li key={person.id}>
-        <Link to={`/character/${person.id}`}>
-        <img src={person.image} alt={person.name} />
-         <h3>{person.name}</h3>
-         <p>{person.species}</p>
-        </Link>
-        
+      <ul>
+        {people.map((person) => {
+          return <Person key={person.id} person={person} />;
+        })}
+      </ul>
+    </div>
+  );
+};
 
-       </li>
-     })}
-    </ul>
-     
-   </div>
-  )
-}
-
-export default PeopleList
+export default PeopleList;

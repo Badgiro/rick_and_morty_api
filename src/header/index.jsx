@@ -1,7 +1,7 @@
 import { useState } from "react";
 import HeaderLogo from "./headerLogo";
 import HeaderNavigation from "./navigation";
-import styles from './style.module.css'
+import styles from "./style.module.css";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);

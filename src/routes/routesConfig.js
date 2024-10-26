@@ -2,7 +2,7 @@ import EpisodePage from "../pages/episodesPage";
 import PeoplePage from "../pages/peoplePage";
 import LocationsPage from "../pages/locationsPage";
 import NotFoundPage from "../pages/notFoundPage";
-import PersonPage from "../components/peoplePage/personPage";
+import PersonPage from "../pages/personPage/"
 
 const RoutesConfig =[
     {

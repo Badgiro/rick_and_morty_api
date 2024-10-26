@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchPeople } from '../../store/slices/peoplePageSlice';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchPeople } from "../../store/slices/peopleSlice";
 
-import styles from './style.module.css';
-import PeopleList from '../../components/peoplePage/peopleList';
+import styles from "./style.module.css";
+import PeopleList from "../../components/peoplePage/peopleList";
 
 const PeoplePage = () => {
   const dispatch = useDispatch();

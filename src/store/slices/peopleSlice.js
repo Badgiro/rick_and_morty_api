@@ -1,10 +1,10 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { fetchData } from '../../utils';
-import { characters } from '../../constants';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { fetchData } from "../../utils";
+import { characters } from "../../constants";
 
-export const fetchPeople = createAsyncThunk('people/fetchPeople', async () => {
+export const fetchPeople = createAsyncThunk("people/fetchPeople", async () => {
   const res = await fetchData(characters);
-  console.log(res)
+  console.log(res);
   if (res) {
     return res.results.map(({ id, image, name, species }) => ({
       id,
@@ -12,17 +12,18 @@ export const fetchPeople = createAsyncThunk('people/fetchPeople', async () => {
       name,
       species,
     }));
+  }else {
+    console.log("Error:we cant get data from this server")
   }
 });
 
-const peoplePageSlice = createSlice({
-  name: 'People',
+const peopleSlice = createSlice({
+  name: "People",
   initialState: {
     data: [],
   },
   reducers: {
     addPeople(state, action) {
-   
       state.data = [...action.payload.people];
     },
   },
@@ -33,5 +34,5 @@ const peoplePageSlice = createSlice({
   },
 });
 
-export const { addPeople } = peoplePageSlice.actions;
-export default peoplePageSlice.reducer;
+export const { addPeople } = peopleSlice.actions;
+export default peopleSlice.reducer;

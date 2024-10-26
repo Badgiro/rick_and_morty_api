@@ -1,9 +1,17 @@
-import React from 'react'
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchLocations } from "../../store/slices/locationsSlice";
+import LocationsList from "../../components/locationsPage/locationsList";
 
 const LocationsPage = () => {
-  return (
-    <div>LocationsPage</div>
-  )
-}
+  const dispatch = useDispatch();
+  const locations = useSelector((state) => state.locations.data);
 
-export default LocationsPage
+  useEffect(() => {
+    dispatch(fetchLocations());
+  }, [dispatch]);
+
+  return <div>{locations && <LocationsList locations={locations} />}</div>;
+};
+
+export default LocationsPage;
