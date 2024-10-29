@@ -22,12 +22,22 @@ export const fetchPeople = createAsyncThunk(
     }
   }
 )
+export const fetchMultipleCharacters = createAsyncThunk( 'people/fetchMultipleCharacters',
+  async (url) => {
+    const charsPerPage = await fetch(url)
+    const data = await charsPerPage.json()
+   
+    return data
+  }
+)
 
 const peopleSlice = createSlice({
-  name: 'People',
+  name: 'people',
   initialState: {
     data: [],
+    multipleCharacters: []
   },
+  
   reducers: {
     addPeople(state, action) {
       state.data = [...action.payload.people]
@@ -36,6 +46,8 @@ const peopleSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchPeople.fulfilled, (state, action) => {
       state.data = action.payload
+    }).addCase(fetchMultipleCharacters.fulfilled, (state, action) => {
+      state.multipleCharacters = action.payload
     })
   },
 })

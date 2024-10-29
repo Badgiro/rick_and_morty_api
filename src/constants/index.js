@@ -8,7 +8,7 @@ export const RAM_LOCATIONS = "/location"
 export const RAM_EPISODES = "/episode"
 
 export const RAM_API = HTTPS+RAM_ROOT
-export const characters= HTTPS+RAM_ROOT+RAM_CHARACTERS
+export const CHARACTERS= HTTPS+RAM_ROOT+RAM_CHARACTERS
 export const locations= HTTPS+RAM_ROOT+RAM_LOCATIONS
 export const episodes= HTTPS+RAM_ROOT+RAM_EPISODES
 

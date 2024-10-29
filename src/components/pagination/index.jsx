@@ -1,16 +1,17 @@
-import { characters } from '../../constants'
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { CHARACTERS } from "../../constants";
+import { fetchMultipleCharacters } from "../../store/slices/peopleSlice";
 
 const Pagination = ({ info }) => {
-  const ratio = info && info.count && Math.ceil(info.count / 8)
-  const pages = ratio && Array.from(Array(ratio + 1).keys())
-
-  if (pages) pages.shift()
-
-  const multipleCharacters = async (url, characters) => {
-    const charsPerPage = await fetch(url + characters)
-    const data = await charsPerPage.json()
-    console.log(data)
-  }
+  const dispatch = useDispatch();
+  const ratio = info && info.count && Math.ceil(info.count / 8);
+  const pages = ratio && Array.from(Array(ratio + 1).keys());
+  const multipleCharacters = useSelector(
+    (state) => state.people.multipleCharacters
+  );
+  console.log(multipleCharacters);
+  if (pages) pages.shift();
 
   const handleClick = (currentPage) => {
     const listOfIds = (currentPage - 1) * 8 + 1;
@@ -20,9 +21,9 @@ const Pagination = ({ info }) => {
     for (let i = 0; i < 8; i++) {
       list.push(i + listOfIds);
     }
-    
-    multipleCharacters(characters + '/', list);
-  }
+
+    dispatch(fetchMultipleCharacters(CHARACTERS + "/" + list));
+  };
 
   return (
     <div>
@@ -33,11 +34,11 @@ const Pagination = ({ info }) => {
               <span onClick={() => handleClick(item)} key={item}>
                 {item}
               </span>
-            )
+            );
           })}
       </ul>
     </div>
-  )
-}
+  );
+};
 
-export default Pagination
+export default Pagination;

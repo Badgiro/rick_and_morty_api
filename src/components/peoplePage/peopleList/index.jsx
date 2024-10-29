@@ -1,13 +1,14 @@
-
+import { useSelector } from "react-redux";
 import Person from "../person";
 
-const PeopleList = ({ people }) => {
+const PeopleList = () => {
+const people = useSelector((state=> state.people.multipleCharacters))
 
-
+console.log(people)
   return (
     <div>
       <ul>
-        {people.map((person) => (
+        {people && people.map((person) => (
           <Person key={person.id} person={person} />
         ))}
       </ul>
