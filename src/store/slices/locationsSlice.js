@@ -1,11 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { fetchData } from "../../utils";
-import { locations } from "../../constants";
+import { LOCATIONS } from "../../constants";
 
 export const fetchLocations = createAsyncThunk(
   "location/fetchLocation",
   async () => {
-    const res = await fetchData(locations);
+    const res = await fetchData(LOCATIONS);
     if (res) {
       return {
         results: res.results,

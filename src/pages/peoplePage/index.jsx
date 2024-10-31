@@ -1,31 +1,25 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchMultipleCharacters, fetchPeople } from "../../store/slices/peopleSlice";
-import {  CHARACTERS } from "../../constants";
-
-import Pagination from "../../components/pagination";
-import PeopleList from "../../components/peoplePage/peopleList";
-
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchPeople } from '../../store/slices/peopleSlice'
+import { CHARACTERS } from '../../constants'
+import Pagination from '../../components/pagination'
+import PeopleList from '../../components/peoplePage/peopleList'
+import styles from './style.module.css'
 
 const PeoplePage = () => {
- 
-  const dispatch = useDispatch();
-  const {results:people, info} = useSelector((state) => state.people.data);
-  const cuttedPeople = useSelector((state)=> state.people.fetchMultipleCharacters)
+  const dispatch = useDispatch()
+  const { results: people, info } = useSelector((state) => state.people.data)
 
   useEffect(() => {
+    dispatch(fetchPeople(CHARACTERS))
+  }, [dispatch])
 
-    dispatch(fetchPeople(CHARACTERS));
-    dispatch(fetchMultipleCharacters(`${CHARACTERS}/1,2,3,4,5,6,7,8`))
-    
-  }, [dispatch]);
-  console.log(people)
+  return (
+    <div className={styles.people}>
+      {people && <PeopleList people={people} />}
+      {info && <Pagination info={info} />}
+    </div>
+  )
+}
 
-  return <div>
-    <Pagination info={info} />
-    {people && <PeopleList people={people} />}
-    
-    </div>;
-};
-
-export default PeoplePage;
+export default PeoplePage
