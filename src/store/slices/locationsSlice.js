@@ -1,11 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { fetchData } from "../../utils";
-import { LOCATIONS } from "../../constants";
+
 
 export const fetchLocations = createAsyncThunk(
   "location/fetchLocation",
-  async () => {
-    const res = await fetchData(LOCATIONS);
+  async (url) => {
+    const res = await fetchData(url);
+    console.log(res)
     if (res) {
       return {
         results: res.results,
@@ -16,11 +17,20 @@ export const fetchLocations = createAsyncThunk(
     }
   }
 );
+export const fetchMultipleLocations = createAsyncThunk( 'locations/fetchMultipleLocations',
+  async (url) => {
+    const locationsPerPage = await fetch(url)
+    const data = await locationsPerPage.json()
+   
+    return data
+  }
+)
 
 const locationsSlice = createSlice({
   name: "Locations",
   initialState: {
     data: [],
+    multipleLocations:[],
   },
   reducers: {
     addLocations(state, action) {
@@ -30,6 +40,8 @@ const locationsSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchLocations.fulfilled, (state, action) => {
       state.data = action.payload;
+    }).addCase(fetchMultipleLocations.fulfilled, (state, action) => {
+      state.multipleLocations = action.payload
     });
   },
 });

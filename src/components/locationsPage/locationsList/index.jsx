@@ -1,13 +1,15 @@
-import Location from "../location";
 
+import { useSelector } from "react-redux";
+import Location from "../location";
+import styles from "./style.module.css";
 const LocationsList = ({ locations }) => {
-  console.log(locations);
+  const cutedLocations = useSelector((state=> state.locations.multipleLocations))
 
   return (
     <div>
-      <ul>
-        {locations.results &&
-          locations.results.map((location) => {
+      <ul className={styles.locationsList}>
+        {cutedLocations &&
+          cutedLocations.map((location) => {
             return <Location key={location.id} location={location} />;
           })}
       </ul>

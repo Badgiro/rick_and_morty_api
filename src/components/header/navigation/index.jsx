@@ -11,13 +11,13 @@ const HeaderNavigation = ({isOpen, setIsOpen, toggleMenu}) => {
       </button>
       <nav className={` ${styles.menu} ${isOpen ? styles.open : ""}`}>
         <ul className={styles.menu_position}>
-          <li>
+          <li className={styles.navItem}>
             <Link to="/character">Characters</Link>
           </li>
-          <li>
+          <li className={styles.navItem}>
             <Link to="/location">Locations</Link>
           </li>
-          <li>
+          <li className={styles.navItem}>
             <Link to="/episode">Episodes</Link>
           </li>
         </ul>
