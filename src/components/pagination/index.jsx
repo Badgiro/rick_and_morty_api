@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { CHARACTERS } from "../../constants";
-import { fetchMultipleCharacters } from "../../store/slices/peopleSlice";
-import { numberOfItems } from "../../services";
+import { useDispatch } from "react-redux";
+import { useLocation } from "react-router-dom";
+import { numberOfItems } from "../../services"; // Хук для отслеживания изменения маршрута
 import PaginationPage from "@mui/material/Pagination";
 import PaginationItem from "@mui/material/PaginationItem";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
@@ -10,25 +9,32 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import styles from "./style.module.css";
 
 const Pagination = ({ info, count, multipleItemsFetch }) => {
-  const [listOfItems, setListOfItems] = useState([]);
+  const [list, setList] = useState([]);
+  const [currentPage, setCurrentPage] = useState(
+    () => parseInt(sessionStorage.getItem("currentPage"), 10) || 1
+  );
   const dispatch = useDispatch();
+  const location = useLocation();
 
-  const [currentPage, setCurrentPage] = useState(() => {
-    return parseInt(sessionStorage.getItem("currentPage"), 10) || 1;
-  });
-  const list = [];
-  const multipleFetch = (numberOfItems, arrOfItems) => {
+  const updateList = (numberOfItems) => {
     const listOfIds = (currentPage - 1) * numberOfItems + 1;
-    for (let i = 0; i < numberOfItems; i++) {
-      arrOfItems.push(i + listOfIds);
-    }
-    return multipleItemsFetch(list);
+    const newList = Array.from(
+      { length: numberOfItems },
+      (_, i) => i + listOfIds
+    );
+    setList(newList);
+    return multipleItemsFetch(newList);
   };
 
   useEffect(() => {
-    multipleFetch(count, list);
+    setCurrentPage(1);
+    setList(list);
+  }, [location.pathname]);
+
+  useEffect(() => {
+    updateList(count);
     sessionStorage.setItem("currentPage", currentPage);
-  }, [dispatch, currentPage]);
+  }, [currentPage, count]);
 
   return (
     <div className={styles.pagination}>

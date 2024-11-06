@@ -2,7 +2,7 @@
 import { useSelector } from "react-redux";
 import Location from "../location";
 import styles from "./style.module.css";
-const LocationsList = ({ locations }) => {
+const LocationsList = () => {
   const cutedLocations = useSelector((state=> state.locations.multipleLocations))
 
   return (

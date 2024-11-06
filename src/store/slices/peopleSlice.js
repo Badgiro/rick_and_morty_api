@@ -26,6 +26,7 @@ export const fetchMultipleCharacters = createAsyncThunk( 'people/fetchMultipleCh
   async (url) => {
     const charsPerPage = await fetch(url)
     const data = await charsPerPage.json()
+    console.log(data)
    
     return data
   }
