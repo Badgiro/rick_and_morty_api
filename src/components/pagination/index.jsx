@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+
 import { useLocation } from "react-router-dom";
-import { numberOfItems } from "../../services"; // Хук для отслеживания изменения маршрута
+import { numberOfItems } from "../../services"; 
 import PaginationPage from "@mui/material/Pagination";
 import PaginationItem from "@mui/material/PaginationItem";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
@@ -13,8 +13,9 @@ const Pagination = ({ info, count, multipleItemsFetch }) => {
   const [currentPage, setCurrentPage] = useState(
     () => parseInt(sessionStorage.getItem("currentPage"), 10) || 1
   );
-  const dispatch = useDispatch();
+
   const location = useLocation();
+
 
   const updateList = (numberOfItems) => {
     const listOfIds = (currentPage - 1) * numberOfItems + 1;
@@ -35,7 +36,7 @@ const Pagination = ({ info, count, multipleItemsFetch }) => {
     updateList(count);
     sessionStorage.setItem("currentPage", currentPage);
   }, [currentPage, count]);
-
+  console.log(info)
   return (
     <div className={styles.pagination}>
       <PaginationPage
