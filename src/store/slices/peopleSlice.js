@@ -1,20 +1,14 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { changeHTTP, fetchData } from "../../utils";
+import {  fetchData } from "../../utils";
 
 export const fetchPeople = createAsyncThunk(
   "people/fetchPeople",
   async (url) => {
-    const replaceHTTP = changeHTTP(url);
-    const res = await fetchData(replaceHTTP);
+    const res = await fetchData(url);
     console.log(res);
     if (res) {
       return {
-        results: res.results.map(({ id, image, name, species }) => ({
-          id,
-          image,
-          name,
-          species,
-        })),
+        results: res.results.map(person=> person),
         info: res.info,
       };
     } else {
@@ -22,37 +16,24 @@ export const fetchPeople = createAsyncThunk(
     }
   }
 );
-export const fetchMultipleCharacters = createAsyncThunk(
-  "people/fetchMultipleCharacters",
-  async (url) => {
-    const charsPerPage = await fetch(url);
-    const data = await charsPerPage.json();
-    console.log(data);
 
-    return data;
-  }
-);
 
 const peopleSlice = createSlice({
   name: "people",
   initialState: {
     data: [],
-    multipleCharacters: [],
+   
   },
 
   reducers: {
-    addPeople(state, action) {
-      state.data = [...action.payload.people];
-    },
+
   },
   extraReducers: (builder) => {
     builder
       .addCase(fetchPeople.fulfilled, (state, action) => {
         state.data = action.payload;
       })
-      .addCase(fetchMultipleCharacters.fulfilled, (state, action) => {
-        state.multipleCharacters = action.payload;
-      });
+   
   },
 });
 

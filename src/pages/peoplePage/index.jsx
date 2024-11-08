@@ -1,37 +1,33 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useSearchParams } from "react-router-dom";
-import {
-  fetchPeople,
-  fetchMultipleCharacters,
-} from "../../store/slices/peopleSlice";
-import { CHARACTERS } from "../../constants";
-import Pagination from "../../components/pagination";
-import PeopleList from "../../components/peoplePage/peopleList";
-import styles from "./style.module.css";
-import PageLogo from "../../components/pageLogo";
-import logo from "../../assets/images/png/rick-and-morty.png";
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useSearchParams } from 'react-router-dom'
+import { fetchPeople } from '../../store/slices/peopleSlice'
+import { CHARACTERS, RAM_PARAM_PAGE} from '../../constants'
+import Pagination from '../../components/pagination'
+import PeopleList from '../../components/peoplePage/peopleList'
+import styles from './style.module.css'
+import PageLogo from '../../components/pageLogo'
+import logo from '../../assets/images/png/rick-and-morty.png'
 
 const PeoplePage = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const dispatch = useDispatch();
-  const { results: people, info } = useSelector((state) => state.people.data);
+  const [searchParams, setSearchParams] = useSearchParams()
+  const dispatch = useDispatch()
+  const { results: people, info } = useSelector((state) => state.people.data)
 
   const fetchCutedPersons = (arr) =>
-    dispatch(fetchPeople(`${CHARACTERS}/${arr}?${searchParams.toString()}`));
+    dispatch(fetchPeople(`${CHARACTERS}/${RAM_PARAM_PAGE}${arr.toString()}&${searchParams.toString()}`))
 
-  const namesQuery = searchParams.get("name") || "";
+  const namesQuery = searchParams.get('name') || ''
   const handleSubmit = (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const query = form.search.value;
-    setSearchParams({ name: query });
-  };
+    e.preventDefault()
+    const form = e.target
+    const query = form.search.value
+    setSearchParams({ name: query })
+  }
 
   useEffect(() => {
-   dispatch(fetchPeople(`${CHARACTERS}?${searchParams.toString()}`));
-    
-  }, [dispatch, info?.count, searchParams]);
+    dispatch(fetchPeople(`${CHARACTERS}?${searchParams.toString()}`))
+  }, [dispatch, info?.count, searchParams])
 
   return (
     <div className={styles.people}>
@@ -41,9 +37,11 @@ const PeoplePage = () => {
         <input type="submit" value="Search" />
       </form>
       {people && info && <PeopleList filter={namesQuery} />}
-      {info && people && <Pagination multipleItemsFetch={fetchCutedPersons} info={info} count={8} />}
+      {info && people && (
+        <Pagination multipleItemsFetch={fetchCutedPersons} info={info} />
+      )}
     </div>
-  );
-};
+  )
+}
 
-export default PeoplePage;
+export default PeoplePage
