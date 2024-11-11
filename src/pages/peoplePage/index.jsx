@@ -1,47 +1,63 @@
-import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { useSearchParams } from 'react-router-dom'
-import { fetchPeople } from '../../store/slices/peopleSlice'
-import { CHARACTERS, RAM_PARAM_PAGE} from '../../constants'
-import Pagination from '../../components/pagination'
-import PeopleList from '../../components/peoplePage/peopleList'
-import styles from './style.module.css'
-import PageLogo from '../../components/pageLogo'
-import logo from '../../assets/images/png/rick-and-morty.png'
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useSearchParams } from "react-router-dom";
+import { fetchPeople, setStatus } from "../../store/slices/peopleSlice";
+import { CHARACTERS, RAM_PARAM_PAGE } from "../../constants";
+import Pagination from "../../components/pagination";
+import PeopleList from "../../components/peopleList";
+import styles from "./style.module.css";
+import PageLogo from "../../components/pageLogo";
+import logo from "../../assets/images/png/rick-and-morty.png";
+import PeopleFilters from "../../components/peopleFilters";
 
 const PeoplePage = () => {
-  const [searchParams, setSearchParams] = useSearchParams()
-  const dispatch = useDispatch()
-  const { results: people, info } = useSelector((state) => state.people.data)
+  const [searchParams, setSearchParams] = useSearchParams();
+  const dispatch = useDispatch();
+  const { results: people = [], info = null } = useSelector(
+    (state) => state.people.data || { results: [], info: null }
+  );
+  const status = useSelector((state) => state.people.status);
 
   const fetchCutedPersons = (arr) =>
-    dispatch(fetchPeople(`${CHARACTERS}/${RAM_PARAM_PAGE}${arr.toString()}&${searchParams.toString()}`))
+    dispatch(
+      fetchPeople(
+        `${CHARACTERS}/${RAM_PARAM_PAGE}${arr.toString()}&${searchParams.toString()}`
+      )
+    );
 
-  const namesQuery = searchParams.get('name') || ''
+  const handleStatusChange = (newStatus) => {
+    dispatch(setStatus(newStatus));
+    const params = { ...Object.fromEntries(searchParams), status: newStatus };
+    setSearchParams(params);
+  };
+
   const handleSubmit = (e) => {
-    e.preventDefault()
-    const form = e.target
-    const query = form.search.value
-    setSearchParams({ name: query })
-  }
+    e.preventDefault();
+    const form = e.target;
+    const query = form.search.value;
+    const params = {};
+    if (query) params.name = query;
+    if (status) params.status = status;
+    setSearchParams(params);
+  };
 
   useEffect(() => {
-    dispatch(fetchPeople(`${CHARACTERS}?${searchParams.toString()}`))
-  }, [dispatch, info?.count, searchParams])
+    dispatch(fetchPeople(`${CHARACTERS}?${searchParams.toString()}`));
+  }, [dispatch, searchParams, status]);
 
   return (
     <div className={styles.people}>
       <PageLogo logo={logo} />
-      <form autoComplete="off" onSubmit={handleSubmit} action="">
-        <input type="search" name="search" />
-        <input type="submit" value="Search" />
-      </form>
-      {people && info && <PeopleList filter={namesQuery} />}
+      <PeopleFilters
+        handleSubmit={handleSubmit}
+        onStatusChange={handleStatusChange}
+      />
+      {people && info && <PeopleList />}
       {info && people && (
         <Pagination multipleItemsFetch={fetchCutedPersons} info={info} />
       )}
     </div>
-  )
-}
+  );
+};
 
-export default PeoplePage
+export default PeoplePage;
