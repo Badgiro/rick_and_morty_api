@@ -1,29 +1,42 @@
-import { useState } from "react";
-import { Select, MenuItem, FormControl, InputLabel } from "@mui/material";
+import { MenuItem, Select } from '@mui/material'
+import { useDispatch } from 'react-redux'
 
-const PeopleStatus = ({ statusQuery, onStatusChange }) => {
-  const [status, setStatus] = useState(statusQuery || "");
+const PeopleFilter = ({
+  searchParams,
+  setSearchParams,
+  searchItems,
+  setTypeOfSearch,
+  paramName,
+}) => {
+  const dispatch = useDispatch()
+  const onParamChange = (newValue) => {
+    const params = { ...Object.fromEntries(searchParams) }
 
-  const handleChange = (event) => {
-    const selectedStatus = event.target.value;
-    setStatus(selectedStatus);
-    onStatusChange(selectedStatus); 
-  };
+    if (!newValue) {
+      delete params[paramName]
+    } else {
+      params[paramName] = newValue
+    }
+
+    setSearchParams(params)
+    dispatch(setTypeOfSearch(newValue))
+  }
 
   return (
-    <FormControl variant="outlined" sx={{ minWidth: 120, marginLeft: 2 }}>
-      <InputLabel>Status</InputLabel>
-      <Select
-        value={status}
-        onChange={handleChange}
-        label="Status"
-      >
-        <MenuItem value="alive">Alive</MenuItem>
-        <MenuItem value="dead">Dead</MenuItem>
-        <MenuItem value="unknown">Unknown</MenuItem>
-      </Select>
-    </FormControl>
-  );
-};
+    <Select
+      defaultValue=""
+      onChange={(e) => onParamChange(e.target.value)}
+      displayEmpty
+    >
+      <MenuItem value="">All</MenuItem>
+      {searchItems &&
+        searchItems.map((item) => (
+          <MenuItem key={item} value={item.toLowerCase()}>
+            {item}
+          </MenuItem>
+        ))}
+    </Select>
+  )
+}
 
-export default PeopleStatus;
+export default PeopleFilter

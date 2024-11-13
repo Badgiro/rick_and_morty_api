@@ -4,3 +4,19 @@ export const numberOfItems = (items, info) => {
   if (pages) pages.shift();
   return ratio;
 };
+
+export const findKeyByValue = (obj, value) => {
+  for (const [key, val] of Object.entries(obj)) {
+    if (val === value) {
+      return key;
+    }
+  }
+  return null; 
+};
+export const peopleTypeOfFilter = {
+  status:['Dead', 'Alive', 'Unknown'],
+  gender: ['Male, Female, Unknown'],
+  species: ['Alien', 'Human', 'Unknown']
+  
+
+}

@@ -24,12 +24,20 @@ const peopleSlice = createSlice({
       results: [],
       info: null,
     },
-    status: "", 
+    status: "",
+    gender: '',
+    species: '' 
   },
 
   reducers: {
     setStatus(state, action) {
       state.status = action.payload;
+    },
+    setGender(state, action) {
+      state.gender = action.payload;
+    },
+    setSpecies(state, action) {
+      state.species = action.payload;
     },
   },
 

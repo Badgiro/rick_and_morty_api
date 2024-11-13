@@ -1,13 +1,35 @@
-import PeopleSearch from './peopleSearch';
-import PeopleStatus from './peopleStatus';
+import PeopleSearch from './peopleSearch'
+import PeopleStatus from './peopleStatus'
+import { peopleTypeOfFilter } from '../../services'
+import { setStatus } from '../../store/slices/peopleSlice'
 
-const PeopleFilters = ({ handleSubmit, onStatusChange }) => {
+
+const PeopleFilters = ({
+  handleSubmit,
+  onStatusChange,
+  searchParams,
+  onSearchChange,
+  setSearchParams
+}) => {
+ 
   return (
-    <form autoComplete="off" onSubmit={handleSubmit} style={{ display: 'flex' }}>
-      <PeopleSearch />
-      <PeopleStatus onStatusChange={onStatusChange} />
-    </form>
-  );
-};
+    <form
+      autoComplete="off"
+      onSubmit={handleSubmit}
+      style={{ display: 'flex' }}
+    >
+      <PeopleSearch onSearchChange={onSearchChange} />
+      <PeopleStatus
+        searchParams={searchParams}
+        onStatusChange={onStatusChange}
+        setSearchParams={setSearchParams}
+        searchItems = {peopleTypeOfFilter.status}
+        setTypeOfSearch = {setStatus}
+        paramName ={'status'}
 
-export default PeopleFilters;
+      />
+    </form>
+  )
+}
+
+export default PeopleFilters
