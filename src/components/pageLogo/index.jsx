@@ -1,11 +1,11 @@
+import style from "./style.module.css";
 
-
-const PageLogo = ({logo}) => {
+const PageLogo = ({ logo }) => {
   return (
-    <div>
-     <img src={logo} alt="logo" />
+    <div style={{ textAlign: "center" }}>
+      <img src={logo} alt="logo" />
     </div>
-  )
-}
+  );
+};
 
-export default PageLogo
+export default PageLogo;

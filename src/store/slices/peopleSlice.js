@@ -5,7 +5,7 @@ export const fetchPeople = createAsyncThunk(
   "people/fetchPeople",
   async (url) => {
     const res = await fetchData(url);
-    console.log(res);
+
     if (res) {
       return {
         results: res.results.map((person) => person),
@@ -25,8 +25,8 @@ const peopleSlice = createSlice({
       info: null,
     },
     status: "",
-    gender: '',
-    species: '' 
+    gender: "",
+    species: "",
   },
 
   reducers: {
@@ -48,5 +48,5 @@ const peopleSlice = createSlice({
   },
 });
 
-export const { setStatus } = peopleSlice.actions;
+export const { setStatus, setGender, setSpecies } = peopleSlice.actions;
 export default peopleSlice.reducer;

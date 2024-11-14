@@ -4,7 +4,6 @@ import styles from "./style.module.css";
 
 const PeopleList = () => {
   const people = useSelector((state) => state.people.data);
-  console.log(people);
 
   return (
     <div>

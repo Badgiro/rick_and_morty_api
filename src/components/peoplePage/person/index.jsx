@@ -9,7 +9,8 @@ const Person = ({ person }) => {
         <Card
           hoverable
           style={{
-            width: 240,
+            maxWidth: 300,
+            width: "100%",
           }}
           cover={<img alt={person.name} src={person.image} />}
         >

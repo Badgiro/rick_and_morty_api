@@ -1,7 +1,7 @@
 import { TextField, IconButton } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 
-const PeopleSearch = ({ onSearchChange }) => {
+const Search = ({ onSearchChange }) => {
   return (
     <TextField
       id="outlined-basic"
@@ -27,4 +27,4 @@ const PeopleSearch = ({ onSearchChange }) => {
   );
 };
 
-export default PeopleSearch;
+export default Search;

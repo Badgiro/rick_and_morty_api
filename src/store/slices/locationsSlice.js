@@ -1,15 +1,14 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { fetchData } from "../../utils";
 
-
 export const fetchLocations = createAsyncThunk(
   "location/fetchLocation",
   async (url) => {
     const res = await fetchData(url);
-    console.log(res)
+    console.log(res);
     if (res) {
       return {
-        results: res.results,
+        results: res.results.map((location) => location),
         info: res.info,
       };
     } else {
@@ -17,34 +16,31 @@ export const fetchLocations = createAsyncThunk(
     }
   }
 );
-export const fetchMultipleLocations = createAsyncThunk( 'locations/fetchMultipleLocations',
-  async (url) => {
-    const locationsPerPage = await fetch(url)
-    const data = await locationsPerPage.json()
-   
-    return data
-  }
-)
 
 const locationsSlice = createSlice({
-  name: "Locations",
+  name: "locations",
   initialState: {
-    data: [],
-    multipleLocations:[],
+    data: {
+      results: [],
+      info: null,
+    },
+    type:'',
+    dimension:''
   },
   reducers: {
-    addLocations(state, action) {
-      state.data = [...action.payload.locations];
+    setType(state, action) {
+      state.type = action.payload;
+    },
+    setDimension(state, action) {
+      state.dimension = action.payload;
     },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchLocations.fulfilled, (state, action) => {
       state.data = action.payload;
-    }).addCase(fetchMultipleLocations.fulfilled, (state, action) => {
-      state.multipleLocations = action.payload
     });
   },
 });
 
-export const { addLocations } = locationsSlice.actions;
+export const {setType, setDimension } = locationsSlice.actions;
 export default locationsSlice.reducer;

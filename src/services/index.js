@@ -11,12 +11,21 @@ export const findKeyByValue = (obj, value) => {
       return key;
     }
   }
-  return null; 
+  return null;
 };
-export const peopleTypeOfFilter = {
-  status:['Dead', 'Alive', 'Unknown'],
-  gender: ['Male, Female, Unknown'],
-  species: ['Alien', 'Human', 'Unknown']
-  
-
-}
+export const TypeOfFilter = {
+  peopleFilters: {
+    status: ["Dead", "Alive", "Unknown"],
+    gender: ["Male", " Female", "Unknown"],
+    species: ["Alien", "Human", "Unknown"],
+  },
+  locationFilters: {
+    type: ["Space station", "Planet", "Unknown"],
+    dimension: [
+      "Dimension C-137",
+      "Replacement Dimension",
+      "Cronenberg Dimension",
+      "Post-Apocalyptic Dimension",
+    ],
+  },
+};

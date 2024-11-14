@@ -1,9 +1,9 @@
 .peopleList {
-        list-style: none;   
-        display: grid;
-        grid-template-columns: repeat(4, 1fr); 
-        grid-template-rows: repeat(2, 1fr);    
-        gap: 20px;                              
-                                 
-      
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 10px;
+  margin: 61px 0 0 10px;
+  padding: 0;
 }
