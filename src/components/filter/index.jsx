@@ -1,16 +1,12 @@
-import { useState } from "react";
 import { MenuItem, Select } from "@mui/material";
-import { useDispatch } from "react-redux";
 
 const Filter = ({
   searchParams,
   setSearchParams,
   searchItems,
-  setTypeOfSearch,
+
   paramName,
 }) => {
-  const [value, setValue] = useState("");
-  const dispatch = useDispatch();
   const onParamChange = (newValue) => {
     const params = { ...Object.fromEntries(searchParams) };
 
@@ -21,7 +17,6 @@ const Filter = ({
     }
 
     setSearchParams(params);
-    setValue(newValue);
   };
 
   return (
@@ -31,8 +26,8 @@ const Filter = ({
       displayEmpty
       sx={{ maxWidth: "240px", width: "100%" }}
     >
-      <MenuItem value="">
-        {paramName.charAt(0).toUpperCase() + paramName.slice(1)}
+      <MenuItem sx={{ fontWeight: "650" }} value="">
+        {`All ${paramName.charAt(0).toUpperCase() + paramName.slice(1)}`}
       </MenuItem>
       {searchItems.map((item) => (
         <MenuItem key={item} value={item}>

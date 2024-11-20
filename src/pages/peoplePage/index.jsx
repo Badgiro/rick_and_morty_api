@@ -27,6 +27,8 @@ const PeoplePage = () => {
     }),
     [statusData]
   );
+  console.log(searchParams.toString().length);
+
   const fetchCutedPersons = (arr) =>
     dispatch(
       fetchPeople(
@@ -34,7 +36,7 @@ const PeoplePage = () => {
       )
     );
 
-  const handleSearchChange = (e) => {
+  const onSearchChange = (e) => {
     const query = e.target.value;
     const params = { ...Object.fromEntries(searchParams) };
 
@@ -71,7 +73,7 @@ const PeoplePage = () => {
         handleSubmit={handleSubmit}
         searchParams={searchParams}
         setSearchParams={setSearchParams}
-        onSearchChange={handleSearchChange}
+        onSearchChange={onSearchChange}
       />
       {people && info && <PeopleList />}
       {info && people && (

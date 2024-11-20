@@ -10,6 +10,7 @@ const LocationSorting = ({
   onSearchChange,
   setSearchParams,
 }) => {
+  console.log(TypeOfFilter.locationFilters.type);
   return (
     <form
       autoComplete="off"
@@ -22,6 +23,7 @@ const LocationSorting = ({
       }}
     >
       <Search onSearchChange={onSearchChange} />
+
       <Filter
         searchParams={searchParams}
         setSearchParams={setSearchParams}
@@ -33,7 +35,7 @@ const LocationSorting = ({
         searchParams={searchParams}
         setSearchParams={setSearchParams}
         searchItems={TypeOfFilter.locationFilters.dimension}
-        setTypeOfSearch={setDimension}
+        setTypeOfSearch={setType}
         paramName={"dimension"}
       />
     </form>
