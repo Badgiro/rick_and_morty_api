@@ -22,7 +22,7 @@ const LocationSorting = ({
         maxWidth: "1280px",
       }}
     >
-      <Search onSearchChange={onSearchChange} />
+      <Search  onSearchChange={onSearchChange} />
 
       <Filter
         searchParams={searchParams}

@@ -13,9 +13,9 @@ const LocationResidents = ({ residents }) => {
         {residents.length <= 0 ? (
           <p>Loading...</p>
         ) : (
-          residents.map((resident) => {
+          residents.map((resident,index ) => {
             return (
-              <Card key={resident.name} sx={{ maxWidth: 240, maxHeight: 244 }}>
+              <Card key={index} sx={{ maxWidth: 240, maxHeight: 244 }}>
                 <CardActionArea>
                   <CardMedia
                     sx={{ height: 168, width: "100% " }}

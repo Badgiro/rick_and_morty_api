@@ -1,3 +1,7 @@
 .locationsPage {
     text-align: center;
 }
+.locationsSorting {
+    max-width: 1000px;
+    margin:auto;
+}
