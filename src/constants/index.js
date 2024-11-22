@@ -10,4 +10,4 @@ export const RAM_EPISODES = "/episode";
 export const RAM_API = HTTPS + RAM_ROOT;
 export const CHARACTERS = HTTPS + RAM_ROOT + RAM_CHARACTERS;
 export const LOCATIONS = HTTPS + RAM_ROOT + RAM_LOCATIONS;
-export const EPISODES = HTTPS + RAM_ROOT  + RAM_PARAM_PAGE;
+export const EPISODES = HTTPS + RAM_ROOT + RAM_EPISODES;

@@ -8,6 +8,7 @@ export const fetchSingleLocation = createAsyncThunk(
     try {
       // Запрос данных локации
       const res = await fetchData(`${LOCATIONS}/${id}/`);
+      console.log(res);
 
       // Запрос данных резидентов
       const residents = await Promise.all(

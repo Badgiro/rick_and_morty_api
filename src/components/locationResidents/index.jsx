@@ -8,12 +8,12 @@ import styles from "./style.module.css";
 const LocationResidents = ({ residents }) => {
   return (
     <div>
-      <p>Residents:</p>
+      <p style={{ color: "rgba(142, 142, 147, 1)" }}>Residents</p>
       <div className={styles.residentsList}>
-        {residents.length <= 0 ? (
-          <p>Loading...</p>
+        {residents && residents.length <= 0 ? (
+          <p>Who Knows What Or Who living here...</p>
         ) : (
-          residents.map((resident,index ) => {
+          residents.map((resident, index) => {
             return (
               <Card key={index} sx={{ maxWidth: 240, maxHeight: 244 }}>
                 <CardActionArea>
